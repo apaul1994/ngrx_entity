@@ -1,0 +1,32 @@
+{
+  "posts": [
+    {
+      "carNumber": "WBA456",
+      "ownerName": "Amitabha",
+      "type": "[CAR] Add car",
+      "id": 1
+    },
+    {
+      "carNumber": "UPB789",
+      "ownerName": "Samiran",
+      "type": "[CAR] Add car",
+      "id": 2
+    },
+    {
+      "carNumber": "MPA784",
+      "ownerName": "Rasid",
+      "type": "[CAR] Add car",
+      "id": 3
+    },
+    {
+      "carNumber": "GOA789",
+      "ownerName": "Ricky",
+      "type": "[CAR] Add car",
+      "id": 4
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
