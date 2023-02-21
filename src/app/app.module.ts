@@ -9,7 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CarDetailComponent } from './car-detail/car-detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { carNoReducer, carReducer } from './Store/cars.reducer';
+import { carNoReducer, carReducer, errorReducer } from './Store/cars.reducer';
 import { CarsEffects } from './Store/cars.effects';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -21,7 +21,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({cars:carReducer,carNumber:carNoReducer}),
+    StoreModule.forRoot({cars:carReducer,carNumber:carNoReducer, errorMessage:errorReducer}),
     EffectsModule.forRoot([CarsEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ReactiveFormsModule,

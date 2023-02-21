@@ -7,6 +7,10 @@ export const carSelector = createSelector(
     (state:CarState) => state.cars,
     (cars:ReadonlyArray<Car>)=> cars
 )
+export const errorSelector = createSelector(
+    (state:CarState) => state.errorMessage,
+    (errorMessage:Readonly<string>)=> errorMessage
+)
 export const carNumberSelector = createSelector(
     (state:CarState) => state.cars,
     (state:CarState) => state.carNumber,

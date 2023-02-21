@@ -1,4 +1,10 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { CarsEffects } from '../Store/cars.effects';
+import { carNoReducer, carReducer, errorReducer } from '../Store/cars.reducer';
 
 import { CarDetailComponent } from './car-detail.component';
 
@@ -8,7 +14,12 @@ describe('CarDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CarDetailComponent ]
+      declarations: [ CarDetailComponent ],
+      imports:[ReactiveFormsModule,
+        StoreModule.forRoot({cars:carReducer,carNumber:carNoReducer, errorMessage:errorReducer}),
+        EffectsModule.forRoot([CarsEffects]),
+        HttpClientTestingModule
+      ]
     })
     .compileComponents();
 
@@ -20,4 +31,35 @@ describe('CarDetailComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Reactive Form Validation - Owner name check', () => {
+    let ownerName =component.carControl.controls['ownerName'];
+    expect(ownerName.valid).toBeFalsy();
+    expect(ownerName.errors['required']).toBeTruthy();
+  });
+
+  it('Reactive Form Validation - set Owner name check', () => {
+    let ownerName =component.carControl.controls['ownerName'];
+    ownerName.setValue('Amit');
+    expect(ownerName.valid).toBeTruthy();
+    expect(ownerName.value).toEqual('Amit');
+  });
+
+
+  it('Reactive Form Validation - set CAR Number check', () => {
+    let carNumber =component.carControl.controls['carNumber'];
+    carNumber.setValue('WAE345');
+    expect(carNumber.valid).toBeTruthy();
+    expect(carNumber.value).toEqual('WAE345');
+  });
+
+
+  it('Reactive Form Validation - set CAR Number check', () => {
+    let carNumber =component.carControl.controls['carNumber'];
+    carNumber.setValue('WAER45');
+    expect(carNumber.valid).toBeFalsy();
+    expect(carNumber.value).toEqual('WAER45');
+  });
+
+  
 });

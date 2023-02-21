@@ -1,10 +1,11 @@
 import { createReducer, on } from "@ngrx/store";
 import { Car } from "./car";
-import { addCars, addCarsSuccess, deleteCarSuccess, findCarNumber, getCars, getCarsSuccess } from "./cars.action";
+import { addCars, addCarsSuccess, deleteCarSuccess, findCarNumber, gerErrorMessage, getCars, getCarsSuccess } from "./cars.action";
 
 export interface CarState{
     cars:ReadonlyArray<Car>;
     carNumber:Readonly<string>;
+    errorMessage:Readonly<string>;
 }
 
 
@@ -23,6 +24,11 @@ const initialCarNoState=''
 export const carNoReducer = createReducer(
     initialCarNoState,
     on(findCarNumber,(state,{carNumber})=>carNumber)
+)
+const initialErrorState=''
+export const errorReducer = createReducer(
+    initialErrorState,
+    on(gerErrorMessage,(state,{errorMessage})=>errorMessage)
 )
 
 function mockCars():Car[]{

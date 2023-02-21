@@ -8,3 +8,4 @@ export const addCarsSuccess = createAction('[CAR] Add car Success', (car:Car)=>c
 export const deleteCar = createAction('[CAR] Delete car', (carId:number)=>({carId}));
 export const deleteCarSuccess = createAction('[CAR] Delete car Success', (carId:number)=>({carId}));
 export const findCarNumber = createAction('[CAR] find car',(carNumber:string)=>({carNumber}))
+export const gerErrorMessage = createAction('[ERR] get error',(errorMessage:string)=>({errorMessage}))

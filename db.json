@@ -23,6 +23,12 @@
       "ownerName": "Ricky",
       "type": "[CAR] Add car",
       "id": 4
+    },
+    {
+      "carNumber": "EAR879",
+      "ownerName": "Sam",
+      "type": "[CAR] Add car",
+      "id": 5
     }
   ],
   "comments": [],

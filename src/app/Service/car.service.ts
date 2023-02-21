@@ -24,7 +24,6 @@ export class CarService {
   fetchDetailRx(){
     return this.http.get<ReadonlyArray<Car>>(this.url).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.error(error);
         return throwError(error);
       })
     );
@@ -33,7 +32,6 @@ export class CarService {
   addCarDetailRx(data:any){
     return this.http.post<Car>(this.url,data).pipe(
         catchError((error: HttpErrorResponse) => {
-        console.error(error);
         return throwError(error);
       })
     );
@@ -42,7 +40,6 @@ export class CarService {
   deleteDetailRx(id:number){
     return this.http.delete(this.url+id).pipe(
       catchError((error: HttpErrorResponse) => {
-      console.error(error);
       return throwError(error.message);
     })
   );

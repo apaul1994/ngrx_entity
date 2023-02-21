@@ -6,7 +6,7 @@ import { select, Store } from '@ngrx/store';
 import { Car } from '../Store/car';
 import { addCars, deleteCar, findCarNumber, getCars } from '../Store/cars.action';
 import { CarState } from '../Store/cars.reducer';
-import { carNumberSelector, carSelector } from '../Store/cars.selector';
+import { carNumberSelector, carSelector, errorSelector } from '../Store/cars.selector';
 
 @Component({
   selector: 'app-car-detail',
@@ -17,7 +17,8 @@ export class CarDetailComponent {
   carControl:any;
   public carDetail: Car= new Car();
   public cars:any = [];
-  private duplicateData=false;
+  // private duplicateData=false;
+  errorMessage$ = this.store.pipe(select(errorSelector));
 
   cars$ = this.store.pipe(select(carSelector));
   carNumber$=this.store.pipe(select(carNumberSelector));
@@ -72,7 +73,8 @@ export class CarDetailComponent {
   }
 
   fetchCar(){
-    this.store.dispatch(getCars());
+    const status = this.store.dispatch(getCars());
+    console.log("err=>",status);
     // this.carservice.fetchDetail().subscribe((data)=>{
     //     this.cars=data;
     // })
