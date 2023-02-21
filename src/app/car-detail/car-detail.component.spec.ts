@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { CarsEffects } from '../Store/cars.effects';
@@ -61,5 +62,19 @@ describe('CarDetailComponent', () => {
     expect(carNumber.value).toEqual('WAER45');
   });
 
+  it('Reactive Form Validation - form Submit', () => {
+    expect(component.carControl.invalid).toBeTruthy()
+    let ownerName =component.carControl.controls['ownerName'];
+    let carNumber =component.carControl.controls['carNumber'];
+    carNumber.setValue('WAER45');
+    ownerName.setValue('Aman');
+    let btn = fixture.debugElement.query(By.css('input[type=submit'))
+    
+    component.onSubmit();
+    fixture.detectChanges();
+
+    expect(carNumber.value).toEqual(null)
+    expect(ownerName.value).toEqual(null)
+  });
   
 });

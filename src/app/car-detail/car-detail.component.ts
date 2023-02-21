@@ -17,7 +17,6 @@ export class CarDetailComponent {
   carControl:any;
   public carDetail: Car= new Car();
   public cars:any = [];
-  // private duplicateData=false;
   errorMessage$ = this.store.pipe(select(errorSelector));
 
   cars$ = this.store.pipe(select(carSelector));
@@ -74,7 +73,7 @@ export class CarDetailComponent {
 
   fetchCar(){
     const status = this.store.dispatch(getCars());
-    console.log("err=>",status);
+
     // this.carservice.fetchDetail().subscribe((data)=>{
     //     this.cars=data;
     // })
