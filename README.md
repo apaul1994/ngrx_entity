@@ -25,3 +25,15 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## How to Launch the project in Local Environment
+
+To launch the backend you need to a install json-server and run it - below are the command for the same
+    1. npm install json-server
+    2. json-server --watch db.json
+this will serve the purpose of back end.
+
+To launch the angular application you need to run the below command in command prompt inside the application folder
+    1. ng serve
+you can open the browser and in url bar you have to write - http://localhost:4200/ and you will be able to see the application.
