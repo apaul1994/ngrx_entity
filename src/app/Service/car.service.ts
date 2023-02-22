@@ -40,7 +40,7 @@ export class CarService {
   deleteDetailRx(id:number){
     return this.http.delete(this.url+id).pipe(
       catchError((error: HttpErrorResponse) => {
-      return throwError(error.message);
+      return throwError(error);
     })
   );
   }

@@ -9,3 +9,4 @@ export const deleteCar = createAction('[CAR] Delete car', (carId:number)=>({carI
 export const deleteCarSuccess = createAction('[CAR] Delete car Success', (carId:number)=>({carId}));
 export const findCarNumber = createAction('[CAR] find car',(carNumber:string)=>({carNumber}))
 export const gerErrorMessage = createAction('[ERR] get error',(errorMessage:string)=>({errorMessage}))
+export const getLoaderStatus = createAction('[LOADER] get loader status',(loaderStatus:boolean)=>({loaderStatus}))

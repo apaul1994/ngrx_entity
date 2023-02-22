@@ -4,8 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { CarsEffects } from '../Store/cars.effects';
-import { carNoReducer, carReducer, errorReducer } from '../Store/cars.reducer';
+import { carNoReducer, carReducer, errorReducer, loaderReducer } from '../Store/cars.reducer';
 
 import { CarDetailComponent } from './car-detail.component';
 
@@ -17,9 +18,10 @@ describe('CarDetailComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CarDetailComponent ],
       imports:[ReactiveFormsModule,
-        StoreModule.forRoot({cars:carReducer,carNumber:carNoReducer, errorMessage:errorReducer}),
+        StoreModule.forRoot({cars:carReducer,carNumber:carNoReducer, errorMessage:errorReducer,loaderStatus:loaderReducer}),
         EffectsModule.forRoot([CarsEffects]),
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
       ]
     })
     .compileComponents();

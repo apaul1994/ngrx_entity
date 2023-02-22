@@ -1,5 +1,5 @@
 
-<section class="vh" style="background-color: #eee;">
+<!-- <section class="vh" style="background-color: #eee;"> -->
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-50">
         <div class="col-lg-12 col-xl-11">
@@ -46,7 +46,10 @@
                   </form>
   
                 </div>
-                  <p class="text-danger" style="text-align: center;"> {{errorMessage$ | async }}</p>
+                <div *ngIf="(errorMessage$ | async) != ''">
+                  <p class="alert alert-danger">Error Message:{{(errorMessage$ | async)}}</p>
+                </div>
+                  <p class="text-danger" style="text-align: center;"> </p>
                 
                 
             </div>
@@ -73,7 +76,7 @@
         </div>
       </div>
     </div>
-  </section>
+  <!-- </section> -->
 
 
 

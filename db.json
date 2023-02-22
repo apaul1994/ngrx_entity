@@ -25,10 +25,16 @@
       "id": 4
     },
     {
-      "carNumber": "EAR879",
-      "ownerName": "Sam",
+      "carNumber": "ERA874",
+      "ownerName": "Sarath",
       "type": "[CAR] Add car",
-      "id": 5
+      "id": 6
+    },
+    {
+      "carNumber": "GHA789",
+      "ownerName": "Reshma",
+      "type": "[CAR] Add car",
+      "id": 7
     }
   ],
   "comments": [],

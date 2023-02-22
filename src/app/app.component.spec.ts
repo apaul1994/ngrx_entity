@@ -4,15 +4,17 @@ import { HttpClientTestingModule} from '@angular/common/http/testing';
 import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { CarDetailComponent } from './car-detail/car-detail.component';
-import { carNoReducer, carReducer, errorReducer } from './Store/cars.reducer';
+import { carNoReducer, carReducer, errorReducer, loaderReducer } from './Store/cars.reducer';
 import { CarService } from './Service/car.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        StoreModule.forRoot({cars:carReducer,carNumber:carNoReducer, errorMessage:errorReducer}),
+        StoreModule.forRoot({cars:carReducer,carNumber:carNoReducer, errorMessage:errorReducer, loaderStatus:loaderReducer}),
+        NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
       ],
       declarations: [
         AppComponent,

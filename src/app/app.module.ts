@@ -9,24 +9,28 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CarDetailComponent } from './car-detail/car-detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { carNoReducer, carReducer, errorReducer } from './Store/cars.reducer';
+import { carNoReducer, carReducer, errorReducer, loaderReducer } from './Store/cars.reducer';
 import { CarsEffects } from './Store/cars.effects';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    CarDetailComponent
+    CarDetailComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({cars:carReducer,carNumber:carNoReducer, errorMessage:errorReducer}),
+    StoreModule.forRoot({cars:carReducer,carNumber:carNoReducer, errorMessage:errorReducer, loaderStatus:loaderReducer}),
     EffectsModule.forRoot([CarsEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    BrowserAnimationsModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ],
   providers: [],
   bootstrap: [AppComponent]
