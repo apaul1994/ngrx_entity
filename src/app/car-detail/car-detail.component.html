@@ -33,9 +33,9 @@
                       <div class="form-outline flex-fill mb-0">
                         <input type="text" id="form3Example4cd" class="form-control" placeholder="CAR number" formControlName="carNumber" />
                         <label class="form-label" for="form3Example4cd">Car Detail</label><br>
-                        <span class = "text-danger" *ngIf="this.carControl.controls.carNumber.touched && (this.carControl.controls.carNumber.errors?.required)">*Please enter Car number</span>
-                        <span class = "text-danger" *ngIf="this.carControl.controls.carNumber.touched && (this.carControl.controls.carNumber.errors?.minlength||this.carControl.controls.carNumber.errors?.maxlength)">*Maximum 6 character allowed</span>
-                        <br><span class = "text-danger" *ngIf="this.carControl.controls.carNumber.touched && (this.carControl.controls.carNumber.errors?.pattern)">*Pattern is not matched</span>
+                        <span class = "text-danger" *ngIf="(this.carControl.controls.carNumber.touched||this.carControl.controls.carNumber.dirty) && (this.carControl.controls.carNumber.errors?.required)">*Please enter Car number</span>
+                        <span class = "text-danger" *ngIf="(this.carControl.controls.carNumber.touched ||this.carControl.controls.carNumber.dirty) && (this.carControl.controls.carNumber.errors?.minlength||this.carControl.controls.carNumber.errors?.maxlength)">*Maximum 6 character allowed</span>
+                        <br><span class = "text-danger" *ngIf="(this.carControl.controls.carNumber.touched||this.carControl.controls.carNumber.dirty) && (this.carControl.controls.carNumber.errors?.pattern)">*Pattern is not matched</span>
                       </div>
                     </div>
                     <div>

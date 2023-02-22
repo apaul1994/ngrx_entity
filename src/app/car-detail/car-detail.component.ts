@@ -82,6 +82,7 @@ export class CarDetailComponent {
     if (count == 0) {
       this.store.dispatch(addCars(this.carDetail));
     } else {
+      this.store.dispatch(getLoaderStatus(false))
       alert('Car Number Already present.');
     }
     this.carControl.reset();

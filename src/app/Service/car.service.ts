@@ -30,7 +30,10 @@ export class CarService {
   };
 
   addCarDetailRx(data:any){
-    return this.http.post<Car>(this.url,data).pipe(
+    let car=new Car();
+    car.carNumber=data.carNumber;
+    car.ownerName=data.ownerName;
+    return this.http.post<Car>(this.url,car).pipe(
         catchError((error: HttpErrorResponse) => {
         return throwError(error);
       })

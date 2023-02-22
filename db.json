@@ -1,40 +1,24 @@
 {
   "posts": [
     {
-      "carNumber": "WBA456",
-      "ownerName": "Amitabha",
-      "type": "[CAR] Add car",
+      "carNumber": "ERA879",
+      "ownerName": "Aman",
       "id": 1
     },
     {
-      "carNumber": "UPB789",
-      "ownerName": "Samiran",
-      "type": "[CAR] Add car",
+      "carNumber": "EAS784",
+      "ownerName": "Sarath",
       "id": 2
     },
     {
-      "carNumber": "MPA784",
-      "ownerName": "Rasid",
-      "type": "[CAR] Add car",
+      "carNumber": "EAW784",
+      "ownerName": "Karan",
       "id": 3
     },
     {
-      "carNumber": "GOA789",
-      "ownerName": "Ricky",
-      "type": "[CAR] Add car",
+      "carNumber": "TRA741",
+      "ownerName": "Sumith",
       "id": 4
-    },
-    {
-      "carNumber": "ERA874",
-      "ownerName": "Sarath",
-      "type": "[CAR] Add car",
-      "id": 6
-    },
-    {
-      "carNumber": "GHA789",
-      "ownerName": "Reshma",
-      "type": "[CAR] Add car",
-      "id": 7
     }
   ],
   "comments": [],
