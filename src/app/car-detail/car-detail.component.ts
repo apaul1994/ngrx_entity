@@ -2,19 +2,22 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CarService } from '../Service/car.service';
 // import { filter, map } from 'rxjs';
 // import { CarService } from '../Service/car.service';
 import { Car } from '../Store/car';
 import {
   addCars,
   deleteCar,
+  editCars,
   findCarNumber,
   gerErrorMessage,
   getCars,
   getLoaderStatus,
 } from '../Store/cars.action';
-import { CarState } from '../Store/cars.reducer';
+import { CarState, ErrorState } from '../Store/cars.reducer';
 import {
+  carESelector,
   carNumberSelector,
   carSelector,
   errorSelector,
@@ -30,15 +33,19 @@ export class CarDetailComponent {
   carControl: any;
   public carDetail: Car = new Car();
   public cars: any = [];
-  errorMessage$ = this.store.pipe(select(errorSelector));
-  loaderStatus$ = this.store.pipe(select(loaderSelector));
-  cars$ = this.store.pipe(select(carSelector));
+  public editId=0;
+  public addUpdate=false;
+  errorMessage$ = this.storeErr.pipe(select(errorSelector));
+  loaderStatus$ = this.storeErr.pipe(select(loaderSelector));
+  cars$ = this.store.pipe(select(carESelector));
   carNumber$ = this.store.pipe(select(carNumberSelector));
 
   constructor(
     private fb: FormBuilder,
     private store: Store<CarState>,
-    public spinner: NgxSpinnerService
+    private storeErr: Store<ErrorState>,
+    public spinner: NgxSpinnerService,
+    private carservice:CarService
   ) {}
 
   ngOnInit(): void {
@@ -111,5 +118,26 @@ export class CarDetailComponent {
     //   this.fetchCar()
     // })
     // this.store.dispatch(getLoaderStatus(false));
+  }
+
+  updateData(car:Car){
+    this.addUpdate=true;
+    this.editId=car.id;
+    this.carControl.patchValue({
+      ownerName:car.ownerName,
+      carNumber:car.carNumber
+    })
+  }
+  
+  submitUpdate(){
+    console.log(this.carControl.value);
+    let carEdited=new Car();
+    carEdited.carNumber=this.carControl.value.carNumber;
+    carEdited.ownerName=this.carControl.value.ownerName;
+    carEdited.id=this.editId;
+    // this.carservice.editCarDetail(carEdited).subscribe((data)=>console.log(data));
+    this.store.dispatch(editCars(carEdited));
+    this.carControl.reset();
+    this.addUpdate=false;
   }
 }

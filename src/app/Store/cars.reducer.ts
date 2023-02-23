@@ -1,24 +1,60 @@
+import { EntityState, createEntityAdapter } from "@ngrx/entity";
+// import { createEntityAdapter } from "@ngrx/entity/src";
 import { createReducer, on } from "@ngrx/store";
 import { Car } from "./car";
-import { addCars, addCarsSuccess, deleteCarSuccess, findCarNumber, gerErrorMessage, getCars, getCarsSuccess, getLoaderStatus } from "./cars.action";
+import { addCars, addCarsSuccess, deleteCarSuccess, editCarsSuccess, editECarsSuccess, findCarNumber, gerErrorMessage, getCars, getCarsSuccess, getLoaderStatus } from "./cars.action";
 
 export interface CarState{
     cars:ReadonlyArray<Car>;
     carNumber:Readonly<string>;
+}
+
+export interface ErrorState{
     errorMessage:Readonly<string>;
     loaderStatus:Readonly<boolean>;
+
 }
+
+export interface appState{
+    carstate:CarState;
+    errorstate:ErrorState;
+}
+
+export interface CarEState extends EntityState<Car>{}
+
+export const carsAdapter = createEntityAdapter<Car>();
+
+export const initialCarEState = carsAdapter.getInitialState();
+
+
 
 
 export const initialState: ReadonlyArray<Car> =[];
 
 export const carReducer = createReducer(
     initialState,
-    on(getCarsSuccess, (state,{cars})=>[...cars]),
-    on(addCarsSuccess, (state,car) =>[...state,car]),
-    on(deleteCarSuccess, (state,{carId})=>
-        state.filter((car)=>car.id !== carId)
-    )
+    // on(getCarsSuccess, (state,{cars})=>[...state,...cars]),
+    // on(addCarsSuccess, (state,car) =>[...state,car]),
+    // on(deleteCarSuccess, (state,{carId})=>
+    //     state.filter((car)=>car.id !== carId)
+    // ),
+    // on(editCarsSuccess, (state,car)=>{
+    //     const cars = state.map((c)=>{
+    //         if(c.id === car.id){
+    //             return car;
+    //         }
+    //         return c;
+    //     }); 
+    //     return cars;
+    // })
+)
+
+export const carEReducer = createReducer(
+    initialCarEState,
+    on(getCarsSuccess, (state,cars)=>carsAdapter.setAll(cars.cars,state)),
+    on(addCarsSuccess, (state,car)=>carsAdapter.addOne(car,{...state})),
+    on(deleteCarSuccess,(state,carId)=>carsAdapter.removeOne(carId.carId,state)),
+    on(editECarsSuccess,(state,car)=>carsAdapter.updateOne(car,state) )
 )
 
 const initialCarNoState=''
@@ -41,15 +77,3 @@ export const errorReducer = createReducer(
     on(gerErrorMessage,(state,{errorMessage})=>errorMessage)
 )
 
-function mockCars():Car[]{
-    const car = new Car("ABC", "DEF");
-    car.id = 1;
-    const car1 = new Car("GHI", "JKL");
-    car1.id = 2;
-    const car2 = new Car("MNO", "PQR");
-    car2.id = 3;
-
-    const cars = [car,car1,car2];
-    return cars;
-    
-}

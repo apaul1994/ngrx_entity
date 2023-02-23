@@ -2,23 +2,23 @@
   "posts": [
     {
       "carNumber": "ERA879",
-      "ownerName": "Aman",
+      "ownerName": "Aman Malhotra",
       "id": 1
     },
     {
       "carNumber": "EAS784",
-      "ownerName": "Sarath",
+      "ownerName": "Sarath Mohan",
       "id": 2
     },
     {
-      "carNumber": "EAW784",
-      "ownerName": "Karan",
-      "id": 3
+      "carNumber": "TRA741",
+      "ownerName": "Sumith Raha",
+      "id": 4
     },
     {
-      "carNumber": "TRA741",
-      "ownerName": "Sumith",
-      "id": 4
+      "carNumber": "EAR879",
+      "ownerName": "Sam Karan",
+      "id": 5
     }
   ],
   "comments": [],

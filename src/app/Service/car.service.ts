@@ -13,6 +13,9 @@ export class CarService {
   addCarDetail(data:any){
     return this.http.post(this.url,data);
   }
+  editCarDetail(data:any){
+    return this.http.put(this.url+data.id,data);
+  }
 
   deleteDetail(id:number){
     return this.http.delete(this.url+id);
@@ -22,7 +25,8 @@ export class CarService {
     return this.http.get(this.url);
   }
   fetchDetailRx(){
-    return this.http.get<ReadonlyArray<Car>>(this.url).pipe(
+    // return this.http.get<ReadonlyArray<Car>>(this.url).pipe(
+    return this.http.get<Car[]>(this.url).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(error);
       })
@@ -34,6 +38,18 @@ export class CarService {
     car.carNumber=data.carNumber;
     car.ownerName=data.ownerName;
     return this.http.post<Car>(this.url,car).pipe(
+        catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
+    );
+  }
+
+  editCarDetailRx(data:any){
+    let car=new Car();
+    car.carNumber=data.carNumber;
+    car.ownerName=data.ownerName;
+    car.id=data.id;
+    return this.http.put<Car>(this.url+data.id,car).pipe(
         catchError((error: HttpErrorResponse) => {
         return throwError(error);
       })

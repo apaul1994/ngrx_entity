@@ -8,3 +8,12 @@ img{
     margin-bottom: 12%;
     height: 12%;
 }
+
+.tabbtn{
+    background-color: white;
+}
+
+.table-container{
+    width: 60%;
+    margin: auto;
+}

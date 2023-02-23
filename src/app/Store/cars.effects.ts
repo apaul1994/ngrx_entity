@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Update } from '@ngrx/entity/src';
 import { Store } from '@ngrx/store';
 import {
   catchError,
@@ -12,11 +13,15 @@ import {
   tap,
 } from 'rxjs';
 import { CarService } from '../Service/car.service';
+import { Car } from './car';
 import {
   addCars,
   addCarsSuccess,
   deleteCar,
   deleteCarSuccess,
+  editCars,
+  editCarsSuccess,
+  editECarsSuccess,
   gerErrorMessage,
   getCars,
   getCarsSuccess,
@@ -31,7 +36,8 @@ export class CarsEffects {
       ofType(getCars),
       exhaustMap(() =>
         this.carservice.fetchDetailRx().pipe(
-          map((cars) => getCarsSuccess({ cars })),
+          // map((cars) => getCarsSuccess({cars})),
+          map((cars) => getCarsSuccess(cars)),
           tap(() => this.store.dispatch(getLoaderStatus(false))),
           catchError((err, caught) => {
             console.log('message=>', err);
@@ -60,6 +66,53 @@ export class CarsEffects {
       )
     )
   );
+
+
+  editCar$ = createEffect(() =>{
+    return this.action$.pipe(
+      ofType(editCars),
+      concatMap((editCar) =>{
+        return this.carservice.editCarDetailRx(editCar).pipe(
+          map((cars) => {
+            const editedCar: Update<Car> = {
+              id:editCar.id,
+              changes:{
+                ...editCar
+              }
+            }
+            this.store.dispatch(getLoaderStatus(false))
+            return editECarsSuccess(editedCar)
+          }),
+          // tap(() => this.store.dispatch(getLoaderStatus(false))),
+          catchError((err, caught) => {
+            this.store.dispatch(gerErrorMessage(err.message));
+            this.store.dispatch(getLoaderStatus(false));
+            return EMPTY;
+          })
+        )
+        }
+      )
+    )
+  }
+  );
+
+  // editCar$ = createEffect(() =>
+  //   this.action$.pipe(
+  //     ofType(editCars),
+  //     concatMap((editCar) =>
+  //       this.carservice.editCarDetailRx(editCar).pipe(
+  //         // map((cars) => editCarsSuccess(cars)),
+  //         map((cars) => editCarsSuccess(cars)),
+  //         tap(() => this.store.dispatch(getLoaderStatus(false))),
+  //         catchError((err, caught) => {
+  //           this.store.dispatch(gerErrorMessage(err.message));
+  //           this.store.dispatch(getLoaderStatus(false));
+  //           return EMPTY;
+  //         })
+  //       )
+  //     )
+  //   )
+  // );
 
   deleteCar$ = createEffect(() =>
     this.action$.pipe(

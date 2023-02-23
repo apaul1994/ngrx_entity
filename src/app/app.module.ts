@@ -9,7 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CarDetailComponent } from './car-detail/car-detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { carNoReducer, carReducer, errorReducer, loaderReducer } from './Store/cars.reducer';
+import { carEReducer, carNoReducer, carReducer, errorReducer, loaderReducer } from './Store/cars.reducer';
 import { CarsEffects } from './Store/cars.effects';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -24,7 +24,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({cars:carReducer,carNumber:carNoReducer, errorMessage:errorReducer, loaderStatus:loaderReducer}),
+    StoreModule.forRoot({cars:carReducer,carNumber:carNoReducer, errorMessage:errorReducer, loaderStatus:loaderReducer, carsE:carEReducer}),
     EffectsModule.forRoot([CarsEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ReactiveFormsModule,
